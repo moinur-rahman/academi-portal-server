@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
 import { User } from "../entities";
 
 @Resolver()
@@ -21,12 +21,21 @@ class UserResolver {
     @Arg("name", () => String)
     name: string,
     @Arg("password", () => String)
-    password: string
+    password: string,
+    @Arg("ID", () => Int)
+    ID: number,
+    @Arg("department", () => String)
+    department: string,
+    @Arg("section", () => String)
+    section: string
   ): Promise<User> {
     return await User.create({
       email,
       name,
       password,
+      ID,
+      department,
+      section,
     }).save();
   }
 

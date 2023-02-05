@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, Int, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   BeforeInsert,
@@ -8,14 +8,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 
 @Entity()
 @ObjectType()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
-  @Field(() => String)
-  id: string;
+  @PrimaryGeneratedColumn()
+  @Field(() => Int)
+  id!: number;
 
   @CreateDateColumn()
   @Field(() => String)
@@ -37,9 +37,17 @@ class User extends BaseEntity {
   @Field(() => String)
   password: string;
 
-  // @Column({ array: true })
-  // @Field(() => [String]) 
-  // token: string;
+  @Column()
+  @Field(() => Int)
+  ID: number;
+
+  @Column()
+  @Field(() => String)
+  department: string;
+
+  @Column()
+  @Field(() => String)
+  section: string;
 
   @BeforeInsert()
   trimData() {
@@ -47,10 +55,10 @@ class User extends BaseEntity {
     this.email = this.email.trim();
   }
 
-  @BeforeInsert()
-  async encryptPassword() {
-    this.password = await bcrypt.hash(this.password.trim(), 8);
-  }
+  // @BeforeInsert()
+  // async encryptPassword() {
+  //   this.password = await bcrypt.hash(this.password.trim(), 8);
+  // }
 }
 
 export default User;

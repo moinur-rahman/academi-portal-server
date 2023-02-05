@@ -4,7 +4,7 @@ import entities from './entities';
 
 const postgres = new DataSource({
   type: "postgres",
-  database: "academi_portal",
+  database: "academi-portal",
   entities: entities,
   // logging: true,
   synchronize: true,
