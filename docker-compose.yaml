@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - POSTGRES_HOST=host.docker.internal
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=academi_portal
+    networks:
+      - academi_portal
+    volumes:
+      - "./:/app"
+    depends_on:
+      - portgres
+  portgres:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=academi_portal
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - academi_portal
+    volumes:
+      - postgres-database:/var/lib/postgresql/data
+networks:
+  academi_portal:
+    driver: bridge
+volumes:
+  postgres-database:
+    driver: local
+  

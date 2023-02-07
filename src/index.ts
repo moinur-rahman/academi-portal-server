@@ -11,12 +11,12 @@ import postgres from "./db/postgres";
 
 const server = async () => {
   try {
-    postgres.initialize();
+    await postgres.initialize();
     console.log("Data Source has been initialized!");
   } catch (error) {
     console.log("Error during Data Source initialization ", error);
   }
-  
+
   const schema = await createSchema();
 
   const apolloServer = new ApolloServer({
@@ -38,7 +38,6 @@ const server = async () => {
     json(),
     expressMiddleware(apolloServer)
   );
-
 
   const port = process.env.PORT;
   app.listen(port, () => console.log(`Server started on port ${port}`));
