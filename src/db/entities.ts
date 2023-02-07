@@ -1,3 +1,3 @@
-import User from "../entities/User"
+import { Student, Teacher } from "../entities";
 
-export default [User]
+export default [Student, Teacher];

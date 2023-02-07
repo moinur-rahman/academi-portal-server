@@ -1,10 +1,11 @@
 import { buildSchema } from "type-graphql";
 
-import UserResolver from "./user";
+import StudentResolver from "./student";
+import TeacherResolver from "./teacher";
 
 const createSchema = async () => {
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [StudentResolver, TeacherResolver],
   });
 
   return schema;

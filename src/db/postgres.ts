@@ -1,17 +1,16 @@
-import {DataSource} from 'typeorm'
-import entities from './entities';
-
+import { DataSource } from "typeorm";
+import entities from "./entities";
 
 const postgres = new DataSource({
   type: "postgres",
-  database: "academi-portal",
   entities: entities,
   // logging: true,
   synchronize: true,
-  username: "postgres",
-  password: "postgres",
-  host: "localhost",
-  port: 5432,
+  host: process.env.POSTGRES_HOST,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  port: parseInt(process.env.POSTGRES_PORT),
 });
 
-export default postgres
+export default postgres;

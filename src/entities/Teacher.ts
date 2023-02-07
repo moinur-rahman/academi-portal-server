@@ -12,7 +12,7 @@ import {
 
 @Entity()
 @ObjectType()
-class User extends BaseEntity {
+class Teacher extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id!: number;
@@ -38,16 +38,8 @@ class User extends BaseEntity {
   password: string;
 
   @Column()
-  @Field(() => Int)
-  ID: number;
-
-  @Column()
   @Field(() => String)
   department: string;
-
-  @Column()
-  @Field(() => String)
-  section: string;
 
   @BeforeInsert()
   trimData() {
@@ -61,4 +53,4 @@ class User extends BaseEntity {
   // }
 }
 
-export default User;
+export default Teacher;

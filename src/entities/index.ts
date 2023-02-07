@@ -1,3 +1,4 @@
-import User from "./User";
+import Student from "./Student";
+import Teacher from "./Teacher";
 
-export { User };
+export { Student,Teacher };
