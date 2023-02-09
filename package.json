@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r dotenv/config src/index.ts dotenv_config_path=config/dev.env",
+    "start": "node dist/index.js",
     "dev": "nodemon -r dotenv/config src/index.ts dotenv_config_path=config/dev.env",
+    "prod": "nodemon -r dotenv/config src/index.ts dotenv_config_path=config/prod.env",
     "watch": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
