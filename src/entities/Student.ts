@@ -8,14 +8,14 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-// import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 @Entity()
 @ObjectType()
 class Student extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id!: number;
+  @PrimaryGeneratedColumn("uuid")
+  @Field(() => String)
+  id!: string;
 
   @CreateDateColumn()
   @Field(() => String)
@@ -39,7 +39,7 @@ class Student extends BaseEntity {
 
   @Column()
   @Field(() => Int)
-  ID: number;
+  studentId: number;
 
   @Column()
   @Field(() => String)
@@ -49,16 +49,20 @@ class Student extends BaseEntity {
   @Field(() => String)
   section: string;
 
+  @Column()
+  @Field(() => String)
+  phone: string;
+
   @BeforeInsert()
   trimData() {
     this.name = this.name.trim();
     this.email = this.email.trim();
   }
 
-  // @BeforeInsert()
-  // async encryptPassword() {
-  //   this.password = await bcrypt.hash(this.password.trim(), 8);
-  // }
+  @BeforeInsert()
+  async encryptPassword() {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
 }
 
 export default Student;

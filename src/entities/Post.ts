@@ -5,14 +5,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+//   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import bcrypt from "bcryptjs";
+
+// import Teacher from "./Teacher";
 
 @Entity()
 @ObjectType()
-class Teacher extends BaseEntity {
+class Student extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   @Field(() => String)
   id!: string;
@@ -25,36 +27,24 @@ class Teacher extends BaseEntity {
   @Field(() => String)
   updated: Date;
 
-  @Column({ unique: true })
+  @Column()
   @Field(() => String)
-  email: string;
+  title: string;
 
   @Column()
   @Field(() => String)
-  name: string;
+  description: string;
 
-  @Column()
-  @Field(() => String)
-  password: string;
+//   @ManyToOne(()=>Teacher,(teacher)=>teacher.posts){
+//     teacher: Teacher
+//   }
 
-  @Column()
-  @Field(() => String)
-  department: string;
-
-  @Column()
-  @Field(() => String)
-  phone: string;
 
   @BeforeInsert()
   trimData() {
-    this.name = this.name.trim();
-    this.email = this.email.trim();
-  }
-
-  @BeforeInsert()
-  async encryptPassword() {
-    this.password = await bcrypt.hash(this.password.trim(), 8);
+    this.title = this.title.trim();
+    this.description = this.description.trim();
   }
 }
 
-export default Teacher;
+export default Student;
