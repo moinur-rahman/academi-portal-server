@@ -5,40 +5,39 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-//   ManyToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
-// import Teacher from "./Teacher";
+import Teacher from "./Teacher";
 
 @Entity()
 @ObjectType()
-class Student extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+class Post extends BaseEntity {
   @Field(() => String)
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @CreateDateColumn()
   @Field(() => String)
+  @CreateDateColumn()
   created: Date;
 
-  @UpdateDateColumn()
   @Field(() => String)
+  @UpdateDateColumn()
   updated: Date;
 
-  @Column()
   @Field(() => String)
+  @Column()
   title: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   description: string;
 
-//   @ManyToOne(()=>Teacher,(teacher)=>teacher.posts){
-//     teacher: Teacher
-//   }
-
+  @Field(() => Teacher)
+  @ManyToOne(() => Teacher, (teacher) => teacher.posts)
+  teacher: Teacher;
 
   @BeforeInsert()
   trimData() {
@@ -47,4 +46,4 @@ class Student extends BaseEntity {
   }
 }
 
-export default Student;
+export default Post;

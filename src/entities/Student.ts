@@ -13,44 +13,44 @@ import bcrypt from "bcryptjs";
 @Entity()
 @ObjectType()
 class Student extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
   @Field(() => String)
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @CreateDateColumn()
   @Field(() => String)
+  @CreateDateColumn()
   created: Date;
 
-  @UpdateDateColumn()
   @Field(() => String)
+  @UpdateDateColumn()
   updated: Date;
 
-  @Column({ unique: true })
   @Field(() => String)
+  @Column({ unique: true })
   email: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   name: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   password: string;
 
-  @Column()
   @Field(() => Int)
+  @Column()
   studentId: number;
 
-  @Column()
   @Field(() => String)
+  @Column()
   department: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   section: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   phone: string;
 
   @BeforeInsert()

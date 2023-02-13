@@ -1,3 +1,3 @@
-import { Student, Teacher } from "../entities";
+import { Student, Teacher, Post } from "../entities";
 
-export default [Student, Teacher];
+export default [Student, Teacher, Post];

@@ -5,45 +5,51 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import bcrypt from "bcryptjs";
 
+import Post from "./Post";
 @Entity()
 @ObjectType()
 class Teacher extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
   @Field(() => String)
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @CreateDateColumn()
   @Field(() => String)
+  @CreateDateColumn()
   created: Date;
 
-  @UpdateDateColumn()
   @Field(() => String)
+  @UpdateDateColumn()
   updated: Date;
 
-  @Column({ unique: true })
   @Field(() => String)
+  @Column({ unique: true })
   email: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   name: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   password: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   department: string;
 
-  @Column()
   @Field(() => String)
+  @Column()
   phone: string;
+
+  @Field(() => [Post], { nullable: true })
+  @OneToMany(() => Post, (post) => post.teacher)
+  posts: Post[];
 
   @BeforeInsert()
   trimData() {
