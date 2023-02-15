@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import entities from "./entities";
 
-const postgres = new DataSource({
+const postgres:DataSource = new DataSource({
   type: "postgres",
   entities: entities,
   // logging: true,
@@ -10,7 +10,9 @@ const postgres = new DataSource({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  port: parseInt(process.env.POSTGRES_PORT),
+  port: process.env.POSTGRES_PORT
+    ? parseInt(process.env.POSTGRES_PORT)
+    : undefined,
 });
 
 export default postgres;

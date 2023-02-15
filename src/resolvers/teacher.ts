@@ -27,16 +27,19 @@ class TeacherResolver {
     @Arg("phone", () => String)
     phone: string
   ): Promise<Teacher> {
-    const teacher = await Teacher.create({
+    const teacher: Teacher = Teacher.create({
       email,
       name,
       password,
       department,
       phone,
     });
-
-    await teacher.save();
-    return teacher;
+    try {
+      await teacher.save();
+      return teacher;
+    } catch (error) {
+      throw new Error("Failed to save data");
+    }
   }
 
   @Mutation(() => Teacher)
@@ -47,7 +50,7 @@ class TeacherResolver {
     password: string
   ): Promise<Teacher> {
     try {
-      const teacher: Teacher = await Teacher.findOneBy({ email });
+      const teacher: Teacher | null = await Teacher.findOneBy({ email });
 
       if (!teacher) {
         throw new Error("Credential not match");
@@ -58,8 +61,8 @@ class TeacherResolver {
       }
       return teacher;
     } catch (error) {
-      console.log(error);
-      return error;
+    
+      throw new Error("Could not login!");
     }
   }
 }

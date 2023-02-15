@@ -1,6 +1,5 @@
 import { Arg, Mutation, Resolver, Query } from "type-graphql";
 import { Teacher, Post } from "../entities";
-import postgres from "../db/postgres";
 
 @Resolver()
 class PostResolver {
@@ -24,14 +23,17 @@ class PostResolver {
     @Arg("teacherId", () => String)
     teacherId: string
   ): Promise<Post> {
-    const teacher = await postgres
-      .getRepository(Teacher)
-      .findOne({ where: { id: teacherId } });
-    const post = await postgres
-      .getRepository(Post)
-      .create({ title, description, teacher });
-    await postgres.getRepository(Post).save(post);
-    return post;
+    try {
+      const teacher = await Teacher.findOne({ where: { id: teacherId } });
+      if (!teacher) {
+        throw new Error("Teacher Id not found");
+      }
+      const post: Post = Post.create({ title, description, teacher });
+      await post.save();
+      return post;
+    } catch (error) {
+      throw new Error("Post couldn't be saved");
+    }
   }
 }
 
