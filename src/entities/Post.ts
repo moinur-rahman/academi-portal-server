@@ -17,7 +17,7 @@ import Teacher from "./Teacher";
 class Post extends BaseEntity {
   @Field(() => String)
   @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  id: string;
 
   @Field(() => String)
   @CreateDateColumn()
