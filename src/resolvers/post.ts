@@ -5,13 +5,11 @@ import { Teacher, Post } from "../entities";
 class PostResolver {
   @Query(() => [Post])
   async getAllPosts(): Promise<Post[]> {
-    try {
-      const posts: Post[] = await Post.find({});
+    const posts = await Post.find();
 
-      return posts;
-    } catch (error) {
-      return error;
-    }
+    if (posts == null) throw new Error("No post found");
+
+    return posts;
   }
 
   @Mutation(() => Post)

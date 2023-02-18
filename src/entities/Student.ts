@@ -15,7 +15,7 @@ import bcrypt from "bcryptjs";
 class Student extends BaseEntity {
   @Field(() => String)
   @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  id: string;
 
   @Field(() => String)
   @CreateDateColumn()

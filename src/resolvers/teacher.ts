@@ -6,12 +6,23 @@ class TeacherResolver {
   @Query(() => [Teacher])
   async getAllTeachers(): Promise<Teacher[]> {
     try {
-      const students = await Teacher.find({});
+      const students = await Teacher.find();
+
+      if (students == null) throw new Error("Students not found");
 
       return students;
     } catch (error) {
       return error;
     }
+  }
+
+  @Query(() => Teacher)
+  async getTeacherById(@Arg("id", () => String) id: string): Promise<Teacher> {
+    const student = await Teacher.findOne({ where: { id } });
+
+    if (student == null) throw new Error("Teacher with ID not found");
+
+    return student;
   }
 
   @Mutation(() => Teacher)
@@ -34,6 +45,7 @@ class TeacherResolver {
       department,
       phone,
     });
+
     try {
       await teacher.save();
       return teacher;
@@ -61,7 +73,6 @@ class TeacherResolver {
       }
       return teacher;
     } catch (error) {
-    
       throw new Error("Could not login!");
     }
   }
