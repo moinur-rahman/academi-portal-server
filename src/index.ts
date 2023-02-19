@@ -1,8 +1,6 @@
 import express, { Express } from "express";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
-import { ApolloServerPluginLandingPageDisabled } from "@apollo/server/plugin/disabled";
 import cors from "cors";
 import { json } from "body-parser";
 import "reflect-metadata";
@@ -21,11 +19,6 @@ const server = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    plugins: [
-      process.env.NODE_ENV === "production"
-        ? ApolloServerPluginLandingPageDisabled()
-        : ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
   });
 
   await apolloServer.start();
