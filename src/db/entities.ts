@@ -1,3 +1,5 @@
 import { Student, Teacher, Post } from "../entities";
 
-export default [Student, Teacher, Post];
+const entities = [Student, Teacher, Post];
+
+export default entities;

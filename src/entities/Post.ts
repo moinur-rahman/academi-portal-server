@@ -17,7 +17,7 @@ import Teacher from "./Teacher";
 class Post extends BaseEntity {
   @Field(() => String)
   @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  id: string;
 
   @Field(() => String)
   @CreateDateColumn()
@@ -38,7 +38,8 @@ class Post extends BaseEntity {
   @Field(() => Teacher)
   @ManyToOne(() => Teacher, (teacher) => teacher.posts)
   teacher: Teacher;
-
+ 
+  
   @BeforeInsert()
   trimData() {
     this.title = this.title.trim();

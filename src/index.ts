@@ -36,7 +36,9 @@ const server = async () => {
     "/graphql",
     cors<cors.CorsRequest>(),
     json(),
-    expressMiddleware(apolloServer)
+    expressMiddleware(apolloServer, {
+      context: async ({ req, res }) => ({ req, res }),
+    })
   );
 
   const port = process.env.PORT;
