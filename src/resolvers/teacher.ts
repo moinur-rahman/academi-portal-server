@@ -18,6 +18,7 @@ class TeacherResolver {
 
   @Query(() => Teacher)
   async getTeacherById(@Arg("id", () => String) id: string): Promise<Teacher> {
+    console.log(id);
     const student = await Teacher.findOne({ where: { id } });
 
     if (student == null) throw new Error("Teacher with ID not found");
