@@ -3,7 +3,6 @@ import { buildSchema } from "type-graphql";
 import StudentResolver from "./student";
 import TeacherResolver from "./teacher";
 import PostResolver from "./post";
-import MeetingResolver from "./meeting";
 
 const createSchema = async () => {
   const schema = await buildSchema({
@@ -11,7 +10,6 @@ const createSchema = async () => {
       StudentResolver,
       TeacherResolver,
       PostResolver,
-      MeetingResolver,
     ],
   });
 

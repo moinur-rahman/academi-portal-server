@@ -63,14 +63,14 @@ class TeacherResolver {
     password: string
   ): Promise<Teacher> {
     try {
-      const teacher: Teacher | null = await Teacher.findOneBy({ email });
+      const teacher = await Teacher.findOneBy({ email });
 
       if (!teacher) {
-        throw new Error("Credential not match");
+        throw new Error("Credential doesn't match");
       }
       let isMatch: boolean = await bcrypt.compare(password, teacher.password);
       if (!isMatch) {
-        throw new Error("Credential not match");
+        throw new Error("Credential doesn't match");
       }
       return teacher;
     } catch (error) {

@@ -31,7 +31,7 @@ class StudentResolver {
     @Arg("phone", () => String)
     phone: string
   ): Promise<Student> {
-    const student: Student = Student.create({
+    const student = Student.create({
       email,
       name,
       password,
@@ -56,14 +56,14 @@ class StudentResolver {
     password: string
   ): Promise<Student> {
     try {
-      const student: Student | null = await Student.findOneBy({ email });
+      const student = await Student.findOneBy({ email });
 
       if (!student) {
-        throw new Error("Credential not match");
+        throw new Error("Credential doesn't match");
       }
       let isMatch: boolean = await bcrypt.compare(password, student.password);
       if (!isMatch) {
-        throw new Error("Credential not match");
+        throw new Error("Credential doesn't match");
       }
       return student;
     } catch (error) {
