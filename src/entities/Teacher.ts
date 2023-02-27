@@ -47,6 +47,10 @@ class Teacher extends BaseEntity {
   @Column()
   phone: string;
 
+  @Field(() => [String], { nullable: true })
+  @Column("simple-array", { nullable: true })
+  tokens: string[];
+
   @Field(() => [Post], { nullable: true })
   @OneToMany(() => Post, (post) => post.teacher)
   posts: Post[];
