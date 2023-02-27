@@ -8,6 +8,10 @@
     "dev": "nodemon src/index.ts",
     "typeorm": "typeorm-ts-node-esm -d src/db/postgres.ts",
     "migration:generate": "yarn typeorm migration:generate",
+    "migration:run": "yarn typeorm migration:run",
+    "migration:revert": "yarn typeorm migration:revert",
+    "migration:show": "yarn typeorm migration:show",
+    "schema:sync": "yarn typeorm schema:sync",
     "watch": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
