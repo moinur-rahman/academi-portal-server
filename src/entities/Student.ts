@@ -52,6 +52,10 @@ class Student extends BaseEntity {
   @Field(() => String)
   @Column()
   phone: string;
+  
+  @Field(() => [String], { nullable: true })
+  @Column("text", { array: true, nullable: true })
+  tokens: string[];
 
   @BeforeInsert()
   trimData() {
